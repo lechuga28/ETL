@@ -52,6 +52,37 @@ Algunos archivos presentaban caracteres especiales.
 Errores al insertar registros duplicados en la base de datos.  
 **Solución:** Se implementaron validaciones previas y manejo de excepciones.
 
+## Se agrega el código SQL 
+    CREATE TABLE companies (
+        company_id VARCHAR(24) PRIMARY KEY,
+        company_name VARCHAR(130)
+    );
+
+    CREATE TABLE charges (
+        id VARCHAR(24) PRIMARY KEY,
+        company_id VARCHAR(24) REFERENCES companies(company_id),
+        amount NUMERIC(16,2) NOT NULL,
+        status VARCHAR(30) NOT NULL,
+        created_at TIMESTAMP NOT NULL,
+        updated_at TIMESTAMP
+    );
+    select count(*) from charges
+
+    select * from companies
+
+    CREATE OR REPLACE VIEW daily_company_totals AS
+    SELECT
+        c.company_name,
+        DATE(ch.created_at) AS transaction_date,
+        SUM(ch.amount) AS total_amount
+    FROM charges ch
+    JOIN companies c
+        ON ch.company_id = c.company_id
+    GROUP BY c.company_name, DATE(ch.created_at)
+    ORDER BY transaction_date;
+
+    SELECT * FROM daily_company_totals;
+
 ## Diagrama de Base de Datos
 
 ```mermaid
@@ -71,4 +102,3 @@ erDiagram
         datetime updated_at
     }
 
-  
