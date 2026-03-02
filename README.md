@@ -70,4 +70,4 @@ erDiagram
         datetime updated_at
     }
 
-    COMPANIES ||--o{ CHARGES : has
+  
