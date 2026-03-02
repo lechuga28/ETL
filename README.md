@@ -54,6 +54,7 @@ Errores al insertar registros duplicados en la base de datos.
 
 ## Diagrama de Base de Datos
 
+```mermaid
 erDiagram
 
     COMPANIES {
