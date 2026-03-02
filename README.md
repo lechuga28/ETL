@@ -54,19 +54,20 @@ Errores al insertar registros duplicados en la base de datos.
 
 ## Diagrama de Base de Datos
 
-```mermaid
 erDiagram
 
-    CLIENTES {
-        int id
-        string nombre
-        string email
-        string telefono
+    COMPANIES {
+        string company_id
+        string company_name
     }
 
-    TRANSACCIONES {
-        int id
-        int cliente_id
-        float monto
-        date fecha
+    CHARGES {
+        string id
+        string company_id
+        float amount
+        string status
+        datetime created_at
+        datetime updated_at
     }
+
+    COMPANIES ||--o{ CHARGES : has
