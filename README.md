@@ -83,6 +83,33 @@ Errores al insertar registros duplicados en la base de datos.
 
     SELECT * FROM daily_company_totals;
 
+## Diagrama de Secuencia electroreport
+sequenceDiagram
+    participant Usuario
+    participant Frontend
+    participant Backend
+    participant BD
+    participant PDF
+    participant S3
+
+    Usuario->>Frontend: Ingresar credenciales
+    Frontend->>Backend: Enviar login
+    Backend->>BD: Validar usuario
+    BD-->>Backend: Usuario válido
+    Backend-->>Frontend: Acceso concedido
+
+    Usuario->>Frontend: Llenar formulario de reporte
+    Frontend->>Backend: Enviar datos
+    Backend->>BD: Guardar información
+    BD-->>Backend: Confirmación
+
+    Backend->>PDF: Generar reporte
+    PDF->>S3: Guardar archivo
+    S3-->>Backend: URL del reporte
+
+    Backend-->>Frontend: Enviar enlace
+    Frontend-->>Usuario: Mostrar reporte
+
 ## Diagrama de Base de Datos
 
 ```mermaid
