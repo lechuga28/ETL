@@ -84,6 +84,7 @@ Errores al insertar registros duplicados en la base de datos.
     SELECT * FROM daily_company_totals;
 
 ## Diagrama de Secuencia electroreport
+```mermaid
 sequenceDiagram
     participant Usuario
     participant Frontend
